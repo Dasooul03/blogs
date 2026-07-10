@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dai's Field Notes｜Agent 开发学习笔记</title>
   <meta name="description" content="记录 AI Agent、RAG 与工程实践中的学习、实验与复盘。">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="archive.css">
 </head>
 <body>
   <nav class="nav shell"><a class="brand" href="#top">Dai's Field Notes</a><div class="links"><a href="#notes">学习记录</a><a href="#path">学习路径</a><a href="#about">关于</a></div></nav>
@@ -17,6 +17,7 @@
       <article class="note"><em>04</em><div><p class="date">AGENT · ENGINEERING RETROSPECTIVE</p><h3>多模态 Agent 的一次工程复盘</h3><p>从不稳定的实时链路切换到更可靠的 HTTP 管线：围绕降级、同步、成本控制和模块解耦的四个决策。</p><a class="article-link" href="articles/multimodal-agent-retro.html">阅读复盘 →</a></div><a href="articles/multimodal-agent-retro.html" aria-label="阅读多模态 Agent 复盘">↗</a></article>
     </section>
     <section class="shell path" id="path"><div><p class="eyebrow">MY LEARNING PATH</p><h2>一条从基础到<br>项目的学习路径</h2><p>采用“先手写、再用框架重构”的方式。每个阶段都要有可运行的产出，而不是只收藏资料。</p></div><ol><li><b>01</b><span><strong>Python 与 API</strong>写工具函数、FastAPI 路由、异步请求和最小 LLM 调用。</span></li><li><b>02</b><span><strong>Agent 核心</strong>理解提示词、Tool Calling、ReAct 循环与短期/长期记忆。</span></li><li><b>03</b><span><strong>RAG 工程</strong>完成文档处理、检索、重排序、评估与可追溯回答。</span></li><li><b>04</b><span><strong>状态化工作流</strong>用 LangGraph 重构流程，再进入多 Agent 协作与综合项目。</span></li></ol></section>
+    <section class="shell archive" aria-labelledby="archive-title"><div class="head"><b id="archive-title">资料库</b><span>10 篇新增</span></div><div class="archive-grid"><a href="articles/rag-product-scope.html"><small>RAG · PROJECT SCOPE</small><strong>一个 RAG 知识库系统要解决什么？</strong></a><a href="articles/rag-project-skeleton.html"><small>RAG · PROJECT SETUP</small><strong>从项目骨架开始搭建 RAG</strong></a><a href="articles/document-import-pipeline.html"><small>RAG · INGESTION</small><strong>非结构化文档如何进入知识库？</strong></a><a href="articles/typed-workflow-state.html"><small>LANGGRAPH · STATE</small><strong>为什么工作流要有显式 State？</strong></a><a href="articles/sse-for-llm-streaming.html"><small>BACKEND · STREAMING</small><strong>用 SSE 把工作流进度和 LLM 输出送到前端</strong></a><a href="articles/query-disambiguation.html"><small>RAG · QUERY UNDERSTANDING</small><strong>检索前，先确认用户到底在问什么</strong></a><a href="articles/python-for-agent-builders.html"><small>PYTHON · FOUNDATION</small><strong>给 Agent 开发者的 Python 基础清单</strong></a><a href="articles/fastapi-minimum-api.html"><small>BACKEND · FASTAPI</small><strong>从一个最小 FastAPI 开始</strong></a><a href="articles/async-api-calls.html"><small>PYTHON · ASYNC</small><strong>异步不是更快，而是别空等</strong></a><a href="articles/rag-model-roles.html"><small>RAG · MODEL ROLES</small><strong>RAG 里三类模型，分别做什么？</strong></a></div></section>
   </main>
   <footer class="shell footer" id="about"><div><p class="eyebrow">ABOUT THIS NOTEBOOK</p><h2>一个开发者的<br>Agent 学习档案。</h2></div><p>这里公开的是经过脱敏和重写的技术学习记录：不发布简历、公司名称、面试题原文或私有项目数据。每篇笔记都尽量保留问题、取舍和下一步实验。</p></footer>
 </body></html>

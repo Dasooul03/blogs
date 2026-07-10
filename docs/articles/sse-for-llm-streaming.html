@@ -1,0 +1,5 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>用 SSE 把工作流进度和 LLM 输出送到前端｜Dai's Field Notes</title><link rel="stylesheet" href="article.css"></head><body><article class="shell"><a class="back" href="../index.html">← 返回学习档案</a><p class="eyebrow">BACKEND · STREAMING</p><h1>用 SSE 把工作流进度和 LLM 输出送到前端</h1><p class="lead">对“服务端持续推送、客户端主要接收”的场景，SSE 是比双工协议更轻的选择：浏览器保持一个 HTTP 长连接，服务端按事件发送增量数据。</p><p class="meta">学习笔记 · 依据本地《检索 Web 服务端搭建》整理</p><h2>适合什么</h2><table><tr><th>场景</th><th>推送内容</th></tr><tr><td>文件导入</td><td>当前节点、完成百分比、失败原因。</td></tr><tr><td>LLM 生成</td><td>token 或文本片段增量，以及结束事件。</td></tr><tr><td>日志与通知</td><td>持续状态变化，而不是高频双向交互。</td></tr></table><h2>协议最小约定</h2><div class="flow">event: progress
+data: {"stage":"chunking","percent":42}
+
+event: answer
+data: {"delta":"正在生成…"}</div><p>每条消息用空行结束。前端可以按 <code>event</code> 分类处理进度、回答和错误；浏览器的 EventSource 也提供自动重连能力。</p><p class="source">来源：本地 SSE 与检索服务端教案。</p></article></body></html>
