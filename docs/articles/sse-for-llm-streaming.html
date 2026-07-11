@@ -1,5 +1,8 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>用 SSE 把工作流进度和 LLM 输出送到前端｜Dai's Field Notes</title><link rel="stylesheet" href="article.css"></head><body><article class="shell"><a class="back" href="../index.html">← 返回学习档案</a><p class="eyebrow">BACKEND · STREAMING</p><h1>用 SSE 把工作流进度和 LLM 输出送到前端</h1><p class="lead">对“服务端持续推送、客户端主要接收”的场景，SSE 是比双工协议更轻的选择：浏览器保持一个 HTTP 长连接，服务端按事件发送增量数据。</p><p class="meta">学习笔记 · 依据本地《检索 Web 服务端搭建》整理</p><h2>适合什么</h2><table><tr><th>场景</th><th>推送内容</th></tr><tr><td>文件导入</td><td>当前节点、完成百分比、失败原因。</td></tr><tr><td>LLM 生成</td><td>token 或文本片段增量，以及结束事件。</td></tr><tr><td>日志与通知</td><td>持续状态变化，而不是高频双向交互。</td></tr></table><h2>协议最小约定</h2><div class="flow">event: progress
-data: {"stage":"chunking","percent":42}
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>用 SSE 把工作流进度和 LLM 输出送到前端｜Dai's Field Notes</title><link rel="stylesheet" href="article.css"></head><body><article class="shell"><a class="back" href="../index.html">← 返回学习档案</a><p class="eyebrow">BACKEND · STREAMING</p><h1>用 SSE 把工作流进度和 LLM 输出送到前端</h1><p class="lead">对“服务端持续推送、客户端主要接收”的场景，SSE 是比双工协议更轻的选择：浏览器保持一个 HTTP 长连接，服务端按事件发送增量数据。</p><p class="meta">学习笔记 · 依据本地《检索 Web 服务端搭建》整理</p><h2>什么时候适合 SSE</h2><p>导入文档时，用户需要知道当前正在解析、切片还是向量化；模型回答时，用户希望看到文字逐步出现；后台任务运行时，前端需要获得错误和完成信号。这些都是服务端单向、持续输出状态的场景。若客户端需要高频发送控制消息或实时协作，再考虑双工通信。</p><h2>事件设计</h2><div class="flow">event: progress
+data: {"task_id":"…","stage":"chunking","percent":42}
 
 event: answer
-data: {"delta":"正在生成…"}</div><p>每条消息用空行结束。前端可以按 <code>event</code> 分类处理进度、回答和错误；浏览器的 EventSource 也提供自动重连能力。</p><p class="source">来源：本地 SSE 与检索服务端教案。</p></article></body></html>
+data: {"task_id":"…","delta":"正在生成…"}
+
+event: done
+data: {"task_id":"…"}</div><p>把 progress、answer、error 和 done 分开，前端才能分别更新步骤条、正文、错误提示和按钮状态。每条消息都带任务 ID，可以避免并发请求的输出混在一起。</p><h2>边界与恢复</h2><p>浏览器自动重连并不代表任务仍然存在。服务端需要定义重连后能否继续、任务结束后何时关闭连接、错误如何转换成用户可读的信息。对于长任务，也要控制缓存和重放范围，避免每次重连都重复发送全部日志。</p><p class="source">来源：本地 SSE 与检索服务端教案。</p></article></body></html>
